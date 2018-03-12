@@ -1,0 +1,19 @@
+version: "3"
+services:
+    postgres:
+        image: postgres:9.6-alpine
+        container_name: postgres
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - 5432:5432
+        volumes:
+            - ./.data/db:/var/lib/postgresql/data
+    beanstalkd:
+        image: schickling/beanstalkd
+        container_name: beanstalkd
+        ports:
+            - 11300:11300
+
