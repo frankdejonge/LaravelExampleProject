@@ -36,6 +36,8 @@ class SpecifyNameTest extends RegistrationProcessTestCase
     {
         $this->when(
             new SpecifyName($this->aggregateRootId, "")
-        )->expectToFail(new SorryInvalidNameProvided);
+        )->expectToFail(
+            new SorryInvalidNameProvided
+        );
     }
 }

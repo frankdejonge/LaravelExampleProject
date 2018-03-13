@@ -12,7 +12,13 @@ abstract class RegistrationProcessTestCase extends AggregateRootTestCase
 {
     protected function aggregateRootId(): AggregateRootId
     {
-         return UuidAggregateRootId::create();
+        static $id;
+
+        if ( ! $id instanceof AggregateRootId) {
+            $id = UuidAggregateRootId::create();
+        }
+
+        return $id;
     }
 
     protected function aggregateRootClassName(): string

@@ -4,6 +4,7 @@ namespace App\RegisteringMembers;
 
 use EventSauce\EventSourcing\AggregateRootRepository;
 use EventSauce\EventSourcing\Time\Clock;
+use LaravelExample\Registration\SpecifyEmail;
 use LaravelExample\Registration\SpecifyName;
 use LaravelExample\Registration\StartRegistration;
 
@@ -35,6 +36,8 @@ class RegistrationCommandHandler
                 $registrationProcess->start();
             } elseif ($command instanceof SpecifyName) {
                 $registrationProcess->specifyName($command->name());
+            } elseif ($command instanceof SpecifyEmail) {
+                $registrationProcess->specify($command->email());
             }
         } finally {
             $this->repository->persist($registrationProcess);
