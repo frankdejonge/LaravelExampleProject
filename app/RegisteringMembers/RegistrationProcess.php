@@ -26,6 +26,8 @@ class RegistrationProcess implements AggregateRoot
 
     public function specifyName(Clock $clock, string $name)
     {
+        $this->guardAgainstInvalidName($name);
+
         $this->recordThat(new NameWasSpecified(
             $clock->pointInTime(),
             $name
@@ -35,5 +37,12 @@ class RegistrationProcess implements AggregateRoot
     protected function applyNameWasSpecified(NameWasSpecified $event)
     {
         
+    }
+
+    private function guardAgainstInvalidName(string $name)
+    {
+        if (empty($name)) {
+            throw new SorryInvalidNameProvided;
+        }
     }
 }

@@ -2,7 +2,7 @@
 namespace: LaravelExample\Registration
 
 types:
-    aggregate_uuid:
+    registrationId:
         type: EventSauce\EventSourcing\UuidAggregateRootId
         serializer: >
             {param}->toString()
@@ -12,18 +12,18 @@ types:
 commands:
     StartRegistration:
         fields:
-            registrationId: aggregate_uuid
+            registrationId: registrationId
     SpecifyName:
         fields:
-            registrationId: aggregate_uuid
+            registrationId: registrationId
             name: string
     SpecifyEmail:
         fields:
-            registrationId: aggregate_uuid
+            registrationId: registrationId
             email: string
     SpeficyPassword:
         fields:
-            registrationId: aggregate_uuid
+            registrationId: registrationId
             password: string
             verificationPassword: string
 events:

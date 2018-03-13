@@ -22,7 +22,6 @@ abstract class RegistrationProcessTestCase extends AggregateRootTestCase
 
     protected function handle($command)
     {
-        (new RegistrationCommandHandler($this->repository, $this->clock()))
-            ->handle($command);
+        (new RegistrationCommandHandler($this->repository, $this->clock()))->handle($command);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Registration;
 
+use App\RegisteringMembers\SorryInvalidNameProvided;
 use LaravelExample\Registration\NameWasSpecified;
 use LaravelExample\Registration\RegistrationHasStarted;
 use LaravelExample\Registration\SpecifyName;
@@ -9,13 +10,19 @@ use LaravelExample\Registration\SpecifyName;
 class SpecifyNameTest extends RegistrationProcessTestCase
 {
     /**
+     * @before
+     */
+    public function preconditions()
+    {
+        $this->given(new RegistrationHasStarted($this->pointInTime()));
+    }
+
+    /**
      * @test
      */
     public function specifying_a_name()
     {
-        $this->given(
-            new RegistrationHasStarted($this->pointInTime())
-        )->when(
+        $this->when(
             new SpecifyName($this->pointInTime(), $this->aggregateRootId, 'Valid Name')
         )->then(
             new NameWasSpecified(
@@ -23,5 +30,15 @@ class SpecifyNameTest extends RegistrationProcessTestCase
                 'Valid Name'
             )
         );
+    }
+
+    /**
+     * @test
+     */
+    public function specifying_an_invalid_name()
+    {
+        $this->when(
+            new SpecifyName($this->pointInTime(), $this->aggregateRootId, "")
+        )->expectToFail(new SorryInvalidNameProvided);
     }
 }
