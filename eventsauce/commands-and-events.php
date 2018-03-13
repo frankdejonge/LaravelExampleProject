@@ -3,33 +3,18 @@
 namespace LaravelExample\Registration;
 
 use EventSauce\EventSourcing\Event;
-use EventSauce\EventSourcing\PointInTime;
 
 final class RegistrationHasStarted implements Event
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRecording;
-
     public function __construct(
-        PointInTime $timeOfRecording
+
     ) {
-        $this->timeOfRecording = $timeOfRecording;
+
     }
 
-    public function timeOfRecording(): PointInTime
+    public static function fromPayload(array $payload): Event
     {
-        return $this->timeOfRecording;
-    }
-
-    public static function fromPayload(
-        array $payload,
-        PointInTime $timeOfRecording): Event
-    {
-        return new RegistrationHasStarted(
-            $timeOfRecording
-        );
+        return new RegistrationHasStarted();
     }
 
     public function toPayload(): array
@@ -37,13 +22,15 @@ final class RegistrationHasStarted implements Event
         return [];
     }
 
-    public static function with(PointInTime $timeOfRecording): RegistrationHasStarted
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function with(): RegistrationHasStarted
     {
         return new RegistrationHasStarted(
-            $timeOfRecording
+            
         );
     }
-
 }
 
 final class NameWasSpecified implements Event
@@ -53,16 +40,9 @@ final class NameWasSpecified implements Event
      */
     private $name;
 
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRecording;
-
     public function __construct(
-        PointInTime $timeOfRecording,
         string $name
     ) {
-        $this->timeOfRecording = $timeOfRecording;
         $this->name = $name;
     }
 
@@ -70,20 +50,10 @@ final class NameWasSpecified implements Event
     {
         return $this->name;
     }
-
-    public function timeOfRecording(): PointInTime
-    {
-        return $this->timeOfRecording;
-    }
-
-    public static function fromPayload(
-        array $payload,
-        PointInTime $timeOfRecording): Event
+    public static function fromPayload(array $payload): Event
     {
         return new NameWasSpecified(
-            $timeOfRecording,
-            (string) $payload['name']
-        );
+            (string) $payload['name']);
     }
 
     public function toPayload(): array
@@ -93,14 +63,15 @@ final class NameWasSpecified implements Event
         ];
     }
 
-    public static function withName(PointInTime $timeOfRecording, string $name): NameWasSpecified
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function withName(string $name): NameWasSpecified
     {
         return new NameWasSpecified(
-            $timeOfRecording,
             $name
         );
     }
-
 }
 
 final class EmailWasSpecified implements Event
@@ -110,16 +81,9 @@ final class EmailWasSpecified implements Event
      */
     private $email;
 
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRecording;
-
     public function __construct(
-        PointInTime $timeOfRecording,
         string $email
     ) {
-        $this->timeOfRecording = $timeOfRecording;
         $this->email = $email;
     }
 
@@ -127,20 +91,10 @@ final class EmailWasSpecified implements Event
     {
         return $this->email;
     }
-
-    public function timeOfRecording(): PointInTime
-    {
-        return $this->timeOfRecording;
-    }
-
-    public static function fromPayload(
-        array $payload,
-        PointInTime $timeOfRecording): Event
+    public static function fromPayload(array $payload): Event
     {
         return new EmailWasSpecified(
-            $timeOfRecording,
-            (string) $payload['email']
-        );
+            (string) $payload['email']);
     }
 
     public function toPayload(): array
@@ -150,41 +104,28 @@ final class EmailWasSpecified implements Event
         ];
     }
 
-    public static function withEmail(PointInTime $timeOfRecording, string $email): EmailWasSpecified
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function withEmail(string $email): EmailWasSpecified
     {
         return new EmailWasSpecified(
-            $timeOfRecording,
             $email
         );
     }
-
 }
 
 final class AccountWasCreated implements Event
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRecording;
-
     public function __construct(
-        PointInTime $timeOfRecording
+
     ) {
-        $this->timeOfRecording = $timeOfRecording;
+
     }
 
-    public function timeOfRecording(): PointInTime
+    public static function fromPayload(array $payload): Event
     {
-        return $this->timeOfRecording;
-    }
-
-    public static function fromPayload(
-        array $payload,
-        PointInTime $timeOfRecording): Event
-    {
-        return new AccountWasCreated(
-            $timeOfRecording
-        );
+        return new AccountWasCreated();
     }
 
     public function toPayload(): array
@@ -192,54 +133,38 @@ final class AccountWasCreated implements Event
         return [];
     }
 
-    public static function with(PointInTime $timeOfRecording): AccountWasCreated
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function with(): AccountWasCreated
     {
         return new AccountWasCreated(
-            $timeOfRecording
+            
         );
     }
-
 }
 
 final class StartRegistration
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRequest;
-
     /**
      * @var \EventSauce\EventSourcing\UuidAggregateRootId
      */
     private $registrationId;
 
     public function __construct(
-        PointInTime $timeOfRequest,
         \EventSauce\EventSourcing\UuidAggregateRootId $registrationId
     ) {
-        $this->timeOfRequest = $timeOfRequest;
         $this->registrationId = $registrationId;
-    }
-
-    public function timeOfRequest(): PointInTime
-    {
-        return $this->timeOfRequest;
     }
 
     public function registrationId(): \EventSauce\EventSourcing\UuidAggregateRootId
     {
         return $this->registrationId;
     }
-
 }
 
 final class SpecifyName
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRequest;
-
     /**
      * @var \EventSauce\EventSourcing\UuidAggregateRootId
      */
@@ -251,18 +176,11 @@ final class SpecifyName
     private $name;
 
     public function __construct(
-        PointInTime $timeOfRequest,
         \EventSauce\EventSourcing\UuidAggregateRootId $registrationId,
         string $name
     ) {
-        $this->timeOfRequest = $timeOfRequest;
         $this->registrationId = $registrationId;
         $this->name = $name;
-    }
-
-    public function timeOfRequest(): PointInTime
-    {
-        return $this->timeOfRequest;
     }
 
     public function registrationId(): \EventSauce\EventSourcing\UuidAggregateRootId
@@ -274,16 +192,10 @@ final class SpecifyName
     {
         return $this->name;
     }
-
 }
 
 final class SpecifyEmail
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRequest;
-
     /**
      * @var \EventSauce\EventSourcing\UuidAggregateRootId
      */
@@ -295,18 +207,11 @@ final class SpecifyEmail
     private $email;
 
     public function __construct(
-        PointInTime $timeOfRequest,
         \EventSauce\EventSourcing\UuidAggregateRootId $registrationId,
         string $email
     ) {
-        $this->timeOfRequest = $timeOfRequest;
         $this->registrationId = $registrationId;
         $this->email = $email;
-    }
-
-    public function timeOfRequest(): PointInTime
-    {
-        return $this->timeOfRequest;
     }
 
     public function registrationId(): \EventSauce\EventSourcing\UuidAggregateRootId
@@ -318,16 +223,10 @@ final class SpecifyEmail
     {
         return $this->email;
     }
-
 }
 
 final class SpeficyPassword
 {
-    /**
-     * @var PointInTime
-     */
-    private $timeOfRequest;
-
     /**
      * @var \EventSauce\EventSourcing\UuidAggregateRootId
      */
@@ -344,20 +243,13 @@ final class SpeficyPassword
     private $verificationPassword;
 
     public function __construct(
-        PointInTime $timeOfRequest,
         \EventSauce\EventSourcing\UuidAggregateRootId $registrationId,
         string $password,
         string $verificationPassword
     ) {
-        $this->timeOfRequest = $timeOfRequest;
         $this->registrationId = $registrationId;
         $this->password = $password;
         $this->verificationPassword = $verificationPassword;
-    }
-
-    public function timeOfRequest(): PointInTime
-    {
-        return $this->timeOfRequest;
     }
 
     public function registrationId(): \EventSauce\EventSourcing\UuidAggregateRootId
@@ -374,5 +266,4 @@ final class SpeficyPassword
     {
         return $this->verificationPassword;
     }
-
 }

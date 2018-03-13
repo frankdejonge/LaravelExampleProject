@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b30d2695e89fe8e246a3eebff9cb98b0",
+    "content-hash": "92b236daf4bee997f8c22e224cae8ecd",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -680,16 +680,16 @@
         },
         {
             "name": "eventsauce/eventsauce",
-            "version": "0.1.2",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EventSaucePHP/EventSauce.git",
-                "reference": "7f931518deeb07b5035e9848006d92c5c54e9121"
+                "reference": "f90336bf4e8c2af4a1de96fd0f6624ed500bb6b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/7f931518deeb07b5035e9848006d92c5c54e9121",
-                "reference": "7f931518deeb07b5035e9848006d92c5c54e9121",
+                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/f90336bf4e8c2af4a1de96fd0f6624ed500bb6b7",
+                "reference": "f90336bf4e8c2af4a1de96fd0f6624ed500bb6b7",
                 "shasum": ""
             },
             "require": {
@@ -718,7 +718,7 @@
                 }
             ],
             "description": "Event sourcing library.",
-            "time": "2018-03-12T21:13:13+00:00"
+            "time": "2018-03-13T20:24:39+00:00"
         },
         {
             "name": "fideloper/proxy",

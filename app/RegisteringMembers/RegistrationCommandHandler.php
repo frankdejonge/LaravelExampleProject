@@ -32,9 +32,9 @@ class RegistrationCommandHandler
 
         try {
             if ($command instanceof StartRegistration) {
-                $registrationProcess->start($this->clock);
+                $registrationProcess->start();
             } elseif ($command instanceof SpecifyName) {
-                $registrationProcess->specifyName($this->clock, $command->name());
+                $registrationProcess->specifyName($command->name());
             }
         } finally {
             $this->repository->persist($registrationProcess);

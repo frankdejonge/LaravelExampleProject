@@ -4,7 +4,6 @@ namespace App\RegisteringMembers;
 
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootBehaviour\AggregateRootBehaviour;
-use EventSauce\EventSourcing\Time\Clock;
 use LaravelExample\Registration\NameWasSpecified;
 use LaravelExample\Registration\RegistrationHasStarted;
 
@@ -12,11 +11,9 @@ class RegistrationProcess implements AggregateRoot
 {
     use AggregateRootBehaviour;
 
-    public function start(Clock $clock)
+    public function start()
     {
-        $this->recordThat(new RegistrationHasStarted(
-            $clock->pointInTime()
-        ));
+        $this->recordThat(new RegistrationHasStarted());
     }
 
     protected function applyRegistrationHasStarted(RegistrationHasStarted $event)
@@ -24,19 +21,18 @@ class RegistrationProcess implements AggregateRoot
         //
     }
 
-    public function specifyName(Clock $clock, string $name)
+    public function specifyName(string $name)
     {
         $this->guardAgainstInvalidName($name);
 
         $this->recordThat(new NameWasSpecified(
-            $clock->pointInTime(),
             $name
         ));
     }
-    
+
     protected function applyNameWasSpecified(NameWasSpecified $event)
     {
-        
+
     }
 
     private function guardAgainstInvalidName(string $name)

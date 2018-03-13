@@ -14,7 +14,7 @@ class SpecifyNameTest extends RegistrationProcessTestCase
      */
     public function preconditions()
     {
-        $this->given(new RegistrationHasStarted($this->pointInTime()));
+        $this->given(new RegistrationHasStarted());
     }
 
     /**
@@ -23,12 +23,9 @@ class SpecifyNameTest extends RegistrationProcessTestCase
     public function specifying_a_name()
     {
         $this->when(
-            new SpecifyName($this->pointInTime(), $this->aggregateRootId, 'Valid Name')
+            new SpecifyName($this->aggregateRootId, 'Valid Name')
         )->then(
-            new NameWasSpecified(
-                $this->pointInTime(),
-                'Valid Name'
-            )
+            new NameWasSpecified('Valid Name')
         );
     }
 
@@ -38,7 +35,7 @@ class SpecifyNameTest extends RegistrationProcessTestCase
     public function specifying_an_invalid_name()
     {
         $this->when(
-            new SpecifyName($this->pointInTime(), $this->aggregateRootId, "")
+            new SpecifyName($this->aggregateRootId, "")
         )->expectToFail(new SorryInvalidNameProvided);
     }
 }
