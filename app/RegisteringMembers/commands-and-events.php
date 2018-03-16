@@ -6,12 +6,6 @@ use EventSauce\EventSourcing\Event;
 
 final class RegistrationHasStarted implements Event
 {
-    public function __construct(
-
-    ) {
-
-    }
-
     public static function fromPayload(array $payload): Event
     {
         return new RegistrationHasStarted();
@@ -27,9 +21,7 @@ final class RegistrationHasStarted implements Event
      */
     public static function with(): RegistrationHasStarted
     {
-        return new RegistrationHasStarted(
-            
-        );
+        return new RegistrationHasStarted();
     }
 }
 
@@ -117,12 +109,6 @@ final class EmailWasSpecified implements Event
 
 final class AccountWasCreated implements Event
 {
-    public function __construct(
-
-    ) {
-
-    }
-
     public static function fromPayload(array $payload): Event
     {
         return new AccountWasCreated();
@@ -138,9 +124,7 @@ final class AccountWasCreated implements Event
      */
     public static function with(): AccountWasCreated
     {
-        return new AccountWasCreated(
-            
-        );
+        return new AccountWasCreated();
     }
 }
 

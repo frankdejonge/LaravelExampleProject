@@ -680,16 +680,16 @@
         },
         {
             "name": "eventsauce/eventsauce",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EventSaucePHP/EventSauce.git",
-                "reference": "8bf5842acb59dea4476e345470e61486e485a4f2"
+                "reference": "c60843a15cbd48ee46451ea2fb7ea5473c22d9f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/8bf5842acb59dea4476e345470e61486e485a4f2",
-                "reference": "8bf5842acb59dea4476e345470e61486e485a4f2",
+                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/c60843a15cbd48ee46451ea2fb7ea5473c22d9f4",
+                "reference": "c60843a15cbd48ee46451ea2fb7ea5473c22d9f4",
                 "shasum": ""
             },
             "require": {
@@ -698,6 +698,7 @@
                 "symfony/yaml": "^3.2"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
                 "phpstan/phpstan": "@stable",
                 "phpunit/phpunit": "^7.0"
             },
@@ -718,7 +719,7 @@
                 }
             ],
             "description": "Event sourcing library.",
-            "time": "2018-03-13T20:24:39+00:00"
+            "time": "2018-03-16T18:22:41+00:00"
         },
         {
             "name": "fideloper/proxy",
