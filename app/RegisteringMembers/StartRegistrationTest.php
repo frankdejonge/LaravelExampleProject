@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Registration;
+namespace App\RegisteringMembers;
 
 use LaravelExample\Registration\RegistrationHasStarted;
 use LaravelExample\Registration\StartRegistration;

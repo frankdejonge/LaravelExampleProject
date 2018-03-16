@@ -1,14 +1,11 @@
 <?php
 
-namespace Tests\Registration;
+namespace App\RegisteringMembers;
 
-use App\RegisteringMembers\SorryInvalidEmailProvided;
-use App\RegisteringMembers\SorryInvalidNameProvided;
 use LaravelExample\Registration\EmailWasSpecified;
 use LaravelExample\Registration\NameWasSpecified;
 use LaravelExample\Registration\RegistrationHasStarted;
 use LaravelExample\Registration\SpecifyEmail;
-use LaravelExample\Registration\SpecifyName;
 
 class SpecifyEmailTest extends RegistrationProcessTestCase
 {

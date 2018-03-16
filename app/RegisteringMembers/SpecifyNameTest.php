@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\Registration;
+namespace App\RegisteringMembers;
 
-use App\RegisteringMembers\SorryInvalidNameProvided;
 use LaravelExample\Registration\NameWasSpecified;
 use LaravelExample\Registration\RegistrationHasStarted;
 use LaravelExample\Registration\SpecifyName;
