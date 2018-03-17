@@ -2,10 +2,12 @@
 
 namespace App\RegisteringMembers;
 
+use App\PasswordHasher;
 use EventSauce\EventSourcing\AggregateRootRepository;
-use EventSauce\EventSourcing\Time\Clock;
+use LaravelExample\Registration\ConfirmRegistration;
 use LaravelExample\Registration\SpecifyEmail;
 use LaravelExample\Registration\SpecifyName;
+use LaravelExample\Registration\SpecifyPassword;
 use LaravelExample\Registration\StartRegistration;
 
 class RegistrationCommandHandler
@@ -16,14 +18,16 @@ class RegistrationCommandHandler
     private $repository;
 
     /**
-     * @var Clock
+     * @var PasswordHasher
      */
-    private $clock;
+    private $passwordHasher;
 
-    public function __construct(AggregateRootRepository $repository, Clock $clock)
-    {
+    public function __construct(
+        AggregateRootRepository $repository,
+        PasswordHasher $passwordHasher
+    ) {
         $this->repository = $repository;
-        $this->clock = $clock;
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function handle($command)
@@ -37,7 +41,15 @@ class RegistrationCommandHandler
             } elseif ($command instanceof SpecifyName) {
                 $registrationProcess->specifyName($command->name());
             } elseif ($command instanceof SpecifyEmail) {
-                $registrationProcess->specify($command->email());
+                $registrationProcess->specifyEmail($command->email());
+            } elseif ($command instanceof SpecifyPassword) {
+                $registrationProcess->specifyPassword(
+                    $this->passwordHasher,
+                    $command->password(),
+                    $command->verificationPassword()
+                );
+            } elseif ($command instanceof ConfirmRegistration) {
+                $registrationProcess->confirmRegistration();
             }
         } finally {
             $this->repository->persist($registrationProcess);

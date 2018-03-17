@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')
+    ->name('register');
+
+Route::post('register', 'Auth\RegisterController@register');
+
+Route::get('/home', 'HomeController@index')->name('home');

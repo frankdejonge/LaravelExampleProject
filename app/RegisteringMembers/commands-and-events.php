@@ -107,24 +107,115 @@ final class EmailWasSpecified implements Event
     }
 }
 
-final class AccountWasCreated implements Event
+final class PasswordWasSpecified implements Event
 {
+    /**
+     * @var string
+     */
+    private $passwordHash;
+
+    public function __construct(
+        string $passwordHash
+    ) {
+        $this->passwordHash = $passwordHash;
+    }
+
+    public function passwordHash(): string
+    {
+        return $this->passwordHash;
+    }
     public static function fromPayload(array $payload): Event
     {
-        return new AccountWasCreated();
+        return new PasswordWasSpecified(
+            (string) $payload['passwordHash']);
     }
 
     public function toPayload(): array
     {
-        return [];
+        return [
+            'passwordHash' => (string) $this->passwordHash,
+        ];
     }
 
     /**
      * @codeCoverageIgnore
      */
-    public static function with(): AccountWasCreated
+    public static function withPasswordHash(string $passwordHash): PasswordWasSpecified
     {
-        return new AccountWasCreated();
+        return new PasswordWasSpecified(
+            $passwordHash
+        );
+    }
+}
+
+final class RegistrationCompleted implements Event
+{
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $passwordHash;
+
+    public function __construct(
+        string $name,
+        string $email,
+        string $passwordHash
+    ) {
+        $this->name = $name;
+        $this->email = $email;
+        $this->passwordHash = $passwordHash;
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function email(): string
+    {
+        return $this->email;
+    }
+
+    public function passwordHash(): string
+    {
+        return $this->passwordHash;
+    }
+    public static function fromPayload(array $payload): Event
+    {
+        return new RegistrationCompleted(
+            (string) $payload['name'],
+            (string) $payload['email'],
+            (string) $payload['passwordHash']);
+    }
+
+    public function toPayload(): array
+    {
+        return [
+            'name' => (string) $this->name,
+            'email' => (string) $this->email,
+            'passwordHash' => (string) $this->passwordHash,
+        ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function withNameAndEmailAndPasswordHash(string $name, string $email, string $passwordHash): RegistrationCompleted
+    {
+        return new RegistrationCompleted(
+            $name,
+            $email,
+            $passwordHash
+        );
     }
 }
 
@@ -209,7 +300,7 @@ final class SpecifyEmail
     }
 }
 
-final class SpeficyPassword
+final class SpecifyPassword
 {
     /**
      * @var \EventSauce\EventSourcing\UuidAggregateRootId
@@ -249,5 +340,24 @@ final class SpeficyPassword
     public function verificationPassword(): string
     {
         return $this->verificationPassword;
+    }
+}
+
+final class ConfirmRegistration
+{
+    /**
+     * @var \EventSauce\EventSourcing\UuidAggregateRootId
+     */
+    private $registrationId;
+
+    public function __construct(
+        \EventSauce\EventSourcing\UuidAggregateRootId $registrationId
+    ) {
+        $this->registrationId = $registrationId;
+    }
+
+    public function registrationId(): \EventSauce\EventSourcing\UuidAggregateRootId
+    {
+        return $this->registrationId;
     }
 }

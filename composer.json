@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "enqueue/laravel-queue": "^0.8.2",
         "enqueue/pheanstalk": "^0.8.23",
         "enqueue/simple-client": "^0.8.22",

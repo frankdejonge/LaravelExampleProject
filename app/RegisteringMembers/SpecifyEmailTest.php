@@ -26,7 +26,7 @@ class SpecifyEmailTest extends RegistrationProcessTestCase
     public function specifying_a_email()
     {
         $this->when(
-            new SpecifyEmail($this->aggregateRootId, 'valid@email.com')
+            new SpecifyEmail($this->registrationId(), 'valid@email.com')
         )->then(
             new EmailWasSpecified('valid@email.com')
         );
@@ -38,7 +38,7 @@ class SpecifyEmailTest extends RegistrationProcessTestCase
     public function specifying_an_invalid_email()
     {
         $this->when(
-            new SpecifyEmail($this->aggregateRootId, "not valid email")
+            new SpecifyEmail($this->registrationId(), "not valid email")
         )->expectToFail(
             new SorryInvalidEmailProvided
         );
@@ -52,7 +52,7 @@ class SpecifyEmailTest extends RegistrationProcessTestCase
         $this->given(
             new EmailWasSpecified('valid@email.com')
         )->when(
-            new SpecifyEmail($this->aggregateRootId, 'valid@email.com')
+            new SpecifyEmail($this->registrationId(), 'valid@email.com')
         )
             ->thenNothingShouldHaveHappened();
     }

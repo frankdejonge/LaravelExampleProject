@@ -13,7 +13,7 @@ class StartRegistrationTest extends RegistrationProcessTestCase
     public function starting_registration()
     {
         $this->when(
-            new StartRegistration($this->aggregateRootId)
+            new StartRegistration($this->registrationId())
         )->then(
             new RegistrationHasStarted()
         );

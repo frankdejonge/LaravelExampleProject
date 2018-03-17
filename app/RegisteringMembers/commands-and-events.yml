@@ -21,11 +21,14 @@ commands:
         fields:
             registrationId: registrationId
             email: string
-    SpeficyPassword:
+    SpecifyPassword:
         fields:
             registrationId: registrationId
             password: string
             verificationPassword: string
+    ConfirmRegistration:
+        fields:
+            registrationId: registrationId
 events:
     RegistrationHasStarted:
         fields: []
@@ -35,5 +38,11 @@ events:
     EmailWasSpecified:
         fields:
             email: string
-    AccountWasCreated:
-        fields: []
+    PasswordWasSpecified:
+        fields:
+            passwordHash: string
+    RegistrationCompleted:
+        fields:
+            name: string
+            email: string
+            passwordHash: string
