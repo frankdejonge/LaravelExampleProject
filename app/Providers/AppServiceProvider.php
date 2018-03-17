@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\PasswordHasher;
+use App\RegisteringMembers\CreateAccountAfterRegistration;
+use App\Users\EloquentUserRepository;
 use Enqueue\SimpleClient\SimpleClient;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Hashing\Hasher;
@@ -31,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PasswordHasher::class, function (Container $container) {
             return new PasswordHasher($container->make(Hasher::class));
+        });
+
+        $this->app->bind(CreateAccountAfterRegistration::class, function (Container $app) {
+            return new CreateAccountAfterRegistration(new EloquentUserRepository());
         });
 
         $this->app->resolving(SimpleClient::class, function (SimpleClient $client, $app) {

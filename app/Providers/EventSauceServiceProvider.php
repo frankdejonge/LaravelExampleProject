@@ -4,11 +4,14 @@ namespace App\Providers;
 
 use App\EventSauce\LaravelMessageDispatcher;
 use App\EventSauce\LaravelMessageRepository;
+use App\PasswordHasher;
+use App\RegisteringMembers\RegistrationCommandHandler;
 use function array_map;
 use function config;
 use Enqueue\SimpleClient\SimpleClient;
 use EventSauce\EventSourcing\AggregateRootRepository;
 use EventSauce\EventSourcing\MessageDispatcherChain;
+use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use EventSauce\EventSourcing\SynchronousMessageDispatcher;
 use Illuminate\Container\Container;
@@ -22,12 +25,23 @@ class EventSauceServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->bind(RegistrationCommandHandler::class, function (Container $app) {
+            return new RegistrationCommandHandler(
+                $app->make(AggregateRootRepository::class),
+                $app->make(PasswordHasher::class)
+            );
+        });
+
+        $this->app->bind(MessageSerializer::class, function () {
+            return new ConstructingMessageSerializer();
+        });
+
         $this->app->bind(AggregateRootRepository::class, function (Container $app) {
             return new AggregateRootRepository(
                 config('eventsauce.aggregate_root'),
                 $app->make(LaravelMessageRepository::class),
                 new MessageDispatcherChain(
-                    $app->make(LaravelMessageDispatcher::class),
+//                    $app->make(LaravelMessageDispatcher::class),
                     $app->make(SynchronousMessageDispatcher::class)
                 )
             );
