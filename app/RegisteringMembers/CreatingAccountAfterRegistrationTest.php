@@ -4,10 +4,9 @@ namespace App\RegisteringMembers;
 
 use App\User;
 use App\Users\InMemoryUserRepository;
-use function compact;
 use EventSauce\EventSourcing\Message;
-use LaravelExample\Registration\RegistrationCompleted;
 use Tests\TestCase;
+use function compact;
 
 class CreatingAccountAfterRegistrationTest extends TestCase
 {

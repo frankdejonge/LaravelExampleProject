@@ -4,22 +4,19 @@ namespace App\Providers;
 
 use App\EventSauce\LaravelMessageDispatcher;
 use App\EventSauce\LaravelMessageRepository;
+use App\Jobs\ProcessRegistrationMessage;
 use App\PasswordHasher;
 use App\RegisteringMembers\RegistrationCommandHandler;
-use function array_map;
-use function config;
-use Enqueue\SimpleClient\SimpleClient;
 use EventSauce\EventSourcing\AggregateRootRepository;
+use EventSauce\EventSourcing\MessageDispatcher;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use EventSauce\EventSourcing\SynchronousMessageDispatcher;
 use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
-use Interop\Queue\PsrMessage;
-use Interop\Queue\PsrProcessor;
-use function json_decode;
-use Throwable;
+use function array_map;
+use function config;
 
 class EventSauceServiceProvider extends ServiceProvider
 {
@@ -37,11 +34,17 @@ class EventSauceServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(AggregateRootRepository::class, function (Container $app) {
+            $asyncDispatcher = null;
+
+            if ( ! empty(config('eventsauce.async_consumers'))) {
+                $asyncDispatcher = $app->make(LaravelMessageDispatcher::class);
+            }
+
             return new AggregateRootRepository(
                 config('eventsauce.aggregate_root'),
                 $app->make(LaravelMessageRepository::class),
                 new MessageDispatcherChain(
-//                    $app->make(LaravelMessageDispatcher::class),
+                    $asyncDispatcher,
                     $app->make(SynchronousMessageDispatcher::class)
                 )
             );
@@ -55,26 +58,18 @@ class EventSauceServiceProvider extends ServiceProvider
             return new SynchronousMessageDispatcher(... $consumers);
         });
 
-        $this->app->resolving(SimpleClient::class, function (SimpleClient $client, Container $app) {
-            $consumers = array_map(function ($consumerName) use ($app) {
-                return $app->make($consumerName);
+        $this->app->bind('eventsauce.async_dispatcher', function (Container $container) {
+            $consumers = array_map(function ($consumerName) use ($container) {
+                return $container->make($consumerName);
             }, config('eventsauce.async_consumers'));
-            $dispatcher = new SynchronousMessageDispatcher(... $consumers);
-            /** @var MessageSerializer $serializer */
-            $serializer = $app[MessageSerializer::class];
-            $client->bind('eventsauce_messages', 'eventsauce_processor', function (PsrMessage $message) use ($dispatcher, $serializer) {
-                try {
-                    $messages = $serializer->unserializePayload(json_decode($message->getBody(), true));
 
-                    foreach ($messages as $message) {
-                        $dispatcher->dispatch($message);
-                    }
+            return new SynchronousMessageDispatcher(... $consumers);
+        });
 
-                    return PsrProcessor::ACK;
-                } catch (Throwable $exception) {
-                    return PsrProcessor::REJECT;
-                }
-            });
+        $this->app->bindMethod(ProcessRegistrationMessage::class.'@handle', function (ProcessRegistrationMessage $job, Container $container) {
+            $dispatcher = $container->make('eventsauce.async_dispatcher');
+
+            return $job->handle($dispatcher);
         });
     }
 }

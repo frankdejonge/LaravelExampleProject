@@ -6,7 +6,6 @@ use App\User;
 use App\Users\UserRepository;
 use EventSauce\EventSourcing\Consumer;
 use EventSauce\EventSourcing\Message;
-use LaravelExample\Registration\RegistrationCompleted;
 
 class CreateAccountAfterRegistration implements Consumer
 {

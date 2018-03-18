@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelExample\Registration;
+namespace App\RegisteringMembers;
 
 use EventSauce\EventSourcing\Event;
 

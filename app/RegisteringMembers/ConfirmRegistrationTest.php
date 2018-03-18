@@ -2,13 +2,6 @@
 
 namespace App\RegisteringMembers;
 
-use LaravelExample\Registration\ConfirmRegistration;
-use LaravelExample\Registration\EmailWasSpecified;
-use LaravelExample\Registration\NameWasSpecified;
-use LaravelExample\Registration\PasswordWasSpecified;
-use LaravelExample\Registration\RegistrationCompleted;
-use LaravelExample\Registration\RegistrationHasStarted;
-
 class ConfirmRegistrationTest extends RegistrationProcessTestCase
 {
     /**

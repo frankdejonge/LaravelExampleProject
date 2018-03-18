@@ -4,11 +4,6 @@ namespace App\RegisteringMembers;
 
 use App\PasswordHasher;
 use EventSauce\EventSourcing\AggregateRootRepository;
-use LaravelExample\Registration\ConfirmRegistration;
-use LaravelExample\Registration\SpecifyEmail;
-use LaravelExample\Registration\SpecifyName;
-use LaravelExample\Registration\SpecifyPassword;
-use LaravelExample\Registration\StartRegistration;
 
 class RegistrationCommandHandler
 {

@@ -2,11 +2,6 @@
 
 namespace App\RegisteringMembers;
 
-use LaravelExample\Registration\EmailWasSpecified;
-use LaravelExample\Registration\NameWasSpecified;
-use LaravelExample\Registration\RegistrationHasStarted;
-use LaravelExample\Registration\SpecifyEmail;
-
 class SpecifyEmailTest extends RegistrationProcessTestCase
 {
     /**

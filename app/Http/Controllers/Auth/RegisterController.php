@@ -11,11 +11,11 @@ use App\RegisteringMembers\SorryPasswordVerificationFailed;
 use function compact;
 use EventSauce\EventSourcing\UuidAggregateRootId;
 use Illuminate\Http\Request;
-use LaravelExample\Registration\ConfirmRegistration;
-use LaravelExample\Registration\SpecifyEmail;
-use LaravelExample\Registration\SpecifyName;
-use LaravelExample\Registration\SpecifyPassword;
-use LaravelExample\Registration\StartRegistration;
+use App\RegisteringMembers\ConfirmRegistration;
+use App\RegisteringMembers\SpecifyEmail;
+use App\RegisteringMembers\SpecifyName;
+use App\RegisteringMembers\SpecifyPassword;
+use App\RegisteringMembers\StartRegistration;
 use function redirect;
 use function view;
 

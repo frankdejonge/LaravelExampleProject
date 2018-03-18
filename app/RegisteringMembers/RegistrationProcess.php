@@ -5,11 +5,6 @@ namespace App\RegisteringMembers;
 use App\PasswordHasher;
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootBehaviour\AggregateRootBehaviour;
-use LaravelExample\Registration\EmailWasSpecified;
-use LaravelExample\Registration\NameWasSpecified;
-use LaravelExample\Registration\PasswordWasSpecified;
-use LaravelExample\Registration\RegistrationCompleted;
-use LaravelExample\Registration\RegistrationHasStarted;
 use function mb_strlen;
 use function preg_match;
 

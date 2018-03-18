@@ -2,10 +2,6 @@
 
 namespace App\RegisteringMembers;
 
-use LaravelExample\Registration\NameWasSpecified;
-use LaravelExample\Registration\RegistrationHasStarted;
-use LaravelExample\Registration\SpecifyName;
-
 class SpecifyNameTest extends RegistrationProcessTestCase
 {
     /**

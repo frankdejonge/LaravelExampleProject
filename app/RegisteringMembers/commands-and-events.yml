@@ -1,5 +1,5 @@
 ---
-namespace: LaravelExample\Registration
+namespace: App\RegisteringMembers
 
 types:
     registrationId:

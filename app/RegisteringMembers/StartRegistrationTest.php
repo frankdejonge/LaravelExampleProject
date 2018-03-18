@@ -2,9 +2,6 @@
 
 namespace App\RegisteringMembers;
 
-use LaravelExample\Registration\RegistrationHasStarted;
-use LaravelExample\Registration\StartRegistration;
-
 class StartRegistrationTest extends RegistrationProcessTestCase
 {
     /**
