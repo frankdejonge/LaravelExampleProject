@@ -2,11 +2,11 @@
 
 namespace App\RegisteringMembers;
 
-use EventSauce\EventSourcing\Event;
+use EventSauce\EventSourcing\Serialization\SerializableEvent;
 
-final class RegistrationHasStarted implements Event
+final class RegistrationHasStarted implements SerializableEvent
 {
-    public static function fromPayload(array $payload): Event
+    public static function fromPayload(array $payload): SerializableEvent
     {
         return new RegistrationHasStarted();
     }
@@ -25,7 +25,7 @@ final class RegistrationHasStarted implements Event
     }
 }
 
-final class NameWasSpecified implements Event
+final class NameWasSpecified implements SerializableEvent
 {
     /**
      * @var string
@@ -42,7 +42,7 @@ final class NameWasSpecified implements Event
     {
         return $this->name;
     }
-    public static function fromPayload(array $payload): Event
+    public static function fromPayload(array $payload): SerializableEvent
     {
         return new NameWasSpecified(
             (string) $payload['name']);
@@ -66,7 +66,7 @@ final class NameWasSpecified implements Event
     }
 }
 
-final class EmailWasSpecified implements Event
+final class EmailWasSpecified implements SerializableEvent
 {
     /**
      * @var string
@@ -83,7 +83,7 @@ final class EmailWasSpecified implements Event
     {
         return $this->email;
     }
-    public static function fromPayload(array $payload): Event
+    public static function fromPayload(array $payload): SerializableEvent
     {
         return new EmailWasSpecified(
             (string) $payload['email']);
@@ -107,7 +107,7 @@ final class EmailWasSpecified implements Event
     }
 }
 
-final class PasswordWasSpecified implements Event
+final class PasswordWasSpecified implements SerializableEvent
 {
     /**
      * @var string
@@ -124,7 +124,7 @@ final class PasswordWasSpecified implements Event
     {
         return $this->passwordHash;
     }
-    public static function fromPayload(array $payload): Event
+    public static function fromPayload(array $payload): SerializableEvent
     {
         return new PasswordWasSpecified(
             (string) $payload['passwordHash']);
@@ -148,7 +148,7 @@ final class PasswordWasSpecified implements Event
     }
 }
 
-final class RegistrationCompleted implements Event
+final class RegistrationCompleted implements SerializableEvent
 {
     /**
      * @var string
@@ -189,7 +189,7 @@ final class RegistrationCompleted implements Event
     {
         return $this->passwordHash;
     }
-    public static function fromPayload(array $payload): Event
+    public static function fromPayload(array $payload): SerializableEvent
     {
         return new RegistrationCompleted(
             (string) $payload['name'],

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3df6a445eaeed39cb888fffe4dd57e5f",
+    "content-hash": "863d8da36b9f36d9646fed00803ce207",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -436,20 +436,20 @@
         },
         {
             "name": "eventsauce/eventsauce",
-            "version": "0.2.2",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EventSaucePHP/EventSauce.git",
-                "reference": "15cc3c6108b8c56df8a9ee67a9b599c54c2ca9f2"
+                "reference": "e94498e67607aefe745e21725b2a9adc9b171b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/15cc3c6108b8c56df8a9ee67a9b599c54c2ca9f2",
-                "reference": "15cc3c6108b8c56df8a9ee67a9b599c54c2ca9f2",
+                "url": "https://api.github.com/repos/EventSaucePHP/EventSauce/zipball/e94498e67607aefe745e21725b2a9adc9b171b54",
+                "reference": "e94498e67607aefe745e21725b2a9adc9b171b54",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
+                "php": "^7.2",
                 "ramsey/uuid": "^3.6",
                 "symfony/yaml": "^3.2"
             },
@@ -475,7 +475,7 @@
                 }
             ],
             "description": "Event sourcing library.",
-            "time": "2018-03-17T21:09:47+00:00"
+            "time": "2018-03-23T15:05:13+00:00"
         },
         {
             "name": "fideloper/proxy",

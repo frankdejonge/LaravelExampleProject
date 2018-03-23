@@ -1,0 +1,1 @@
+Welcome {{ $name  }}! Welcome to this Laravel application!

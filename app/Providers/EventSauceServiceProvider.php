@@ -8,6 +8,7 @@ use App\Jobs\ProcessRegistrationMessage;
 use App\PasswordHasher;
 use App\RegisteringMembers\RegistrationCommandHandler;
 use EventSauce\EventSourcing\AggregateRootRepository;
+use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
 use EventSauce\EventSourcing\MessageDispatcher;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
@@ -40,7 +41,7 @@ class EventSauceServiceProvider extends ServiceProvider
                 $asyncDispatcher = $app->make(LaravelMessageDispatcher::class);
             }
 
-            return new AggregateRootRepository(
+            return new ConstructingAggregateRootRepository(
                 config('eventsauce.aggregate_root'),
                 $app->make(LaravelMessageRepository::class),
                 new MessageDispatcherChain(
