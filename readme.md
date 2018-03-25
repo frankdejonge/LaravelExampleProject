@@ -14,7 +14,9 @@ Now start the server:
 php artisan serve
 ```
 
-and navigate to http://127.0.0.1:8000, and click on the registration link
+In another tab, run `php artisan queue:work` to start the background worker.
+
+You can now navigate to http://127.0.0.1:8000, and click on the registration link
 
 ## About this example
 
