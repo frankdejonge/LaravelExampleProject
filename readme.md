@@ -3,15 +3,16 @@
 To setup the project.
 
 ```bash
+$ composer install
 $ docker-compose -f ./docker-compose.yaml up -d
 $ sleep 4 # or just wait a little for the containers to boot
-php artisan migrate
+$ php artisan migrate
 ```
 
 Now start the server:
 
 ```bash
-php artisan serve
+$ php artisan serve
 ```
 
 In another tab, run `php artisan queue:work` to start the background worker.
